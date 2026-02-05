@@ -21,6 +21,26 @@ regex==2023.12.25
 pydantic==2.5.3
 python-dotenv==1.0.0
 
+# Phase 4: Semantic Similarity Model (ML Core)
+# ML & NLP Models
+
+# Machine Learning
+scikit-learn==1.4.0
+
+# Sentence Transformers (for semantic embeddings)
+sentence-transformers==2.3.1
+torch==2.1.2
+# Note: sentence-transformers will auto-download all-MiniLM-L6-v2 model (~80MB)
+
+# Phase 6: AI Feedback & Recommendation Layer
+# LLM Integration
+
+# OpenRouter (unified LLM API)
+openai>=1.0.0
+
+# Google Gemini
+google-generativeai>=0.3.0
+
 # Development
 pytest==7.4.4
 pytest-asyncio==0.23.3

@@ -1,0 +1,122 @@
+{
+  "version": "1.0.0",
+  "description": "Resume scoring configuration - controls how final scores are calculated",
+  
+  "weights": {
+    "skill_match": 0.40,
+    "semantic_similarity": 0.25,
+    "experience": 0.20,
+    "projects": 0.15
+  },
+  
+  "weight_descriptions": {
+    "skill_match": "Weight for skill matching score (0-1)",
+    "semantic_similarity": "Weight for resume-job semantic similarity (0-1)",
+    "experience": "Weight for years of experience alignment (0-1)",
+    "projects": "Weight for project relevance and count (0-1)"
+  },
+  
+  "score_scale": {
+    "min": 0,
+    "max": 100,
+    "description": "Final score is normalized to 0-100 range"
+  },
+  
+  "interpretation_thresholds": {
+    "excellent": {
+      "min": 85,
+      "max": 100,
+      "label": "Excellent Match",
+      "recommendation": "Strong candidate - Proceed to interview",
+      "emoji": "🟢"
+    },
+    "good": {
+      "min": 70,
+      "max": 84,
+      "label": "Good Match",
+      "recommendation": "Solid candidate - Consider for interview",
+      "emoji": "🟡"
+    },
+    "moderate": {
+      "min": 55,
+      "max": 69,
+      "label": "Moderate Match",
+      "recommendation": "Possible candidate - Review carefully",
+      "emoji": "🟠"
+    },
+    "weak": {
+      "min": 40,
+      "max": 54,
+      "label": "Weak Match",
+      "recommendation": "Below requirements - Unlikely fit",
+      "emoji": "🔴"
+    },
+    "poor": {
+      "min": 0,
+      "max": 39,
+      "label": "Poor Match",
+      "recommendation": "Does not meet requirements",
+      "emoji": "⚫"
+    }
+  },
+  
+  "component_weights_explanation": {
+    "rationale": "Weights reflect industry hiring priorities",
+    "skill_match_40": "Skills are the primary indicator of job fit",
+    "semantic_similarity_25": "Overall resume-job alignment is crucial",
+    "experience_20": "Years of experience show seniority level",
+    "projects_15": "Hands-on project experience demonstrates practical skills"
+  },
+  
+  "penalty_rules": {
+    "missing_required_skills": {
+      "enabled": false,
+      "penalty_per_skill": 5,
+      "description": "Optional: Deduct points for each missing required skill"
+    },
+    "insufficient_experience": {
+      "enabled": false,
+      "penalty_percentage": 10,
+      "description": "Optional: Reduce score if experience < required"
+    },
+    "no_projects": {
+      "enabled": false,
+      "penalty": 10,
+      "description": "Optional: Deduct points if no projects listed"
+    }
+  },
+  
+  "bonus_rules": {
+    "exceeds_experience": {
+      "enabled": false,
+      "bonus_percentage": 5,
+      "threshold_multiplier": 1.5,
+      "description": "Optional: Bonus if experience > 1.5x required"
+    },
+    "perfect_skill_match": {
+      "enabled": false,
+      "bonus": 5,
+      "description": "Optional: Bonus if all required skills matched"
+    }
+  },
+  
+  "normalization": {
+    "method": "weighted_sum",
+    "description": "Features are normalized to 0-1, then weighted and summed",
+    "formula": "final_score = (w1×f1 + w2×f2 + w3×f3 + w4×f4) × 100"
+  },
+  
+  "feature_sources": {
+    "skill_match": "Phase 3 - SkillExtractor normalized output",
+    "semantic_similarity": "Phase 4 - SimilarityEngine semantic_similarity_score",
+    "experience": "Phase 3 - ExperienceExtractor normalized output",
+    "projects": "Phase 3 - ProjectExtractor normalized output"
+  },
+  
+  "metadata": {
+    "created_date": "2026-02-05",
+    "author": "Resume Analyzer Team",
+    "last_modified": "2026-02-05",
+    "phase": 5
+  }
+}
